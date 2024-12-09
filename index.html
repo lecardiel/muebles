@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue Store</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="logo">
+        <h1>RoomCard</h1>
+        <p>Compra los mejores muebles con nosotros</p>
+      </div>
+    </header>
+
+    <div class="products-container">
+      <div v-for="product in products" :key="product.id" class="product-card">
+        <div class="image-container">
+          <img :src="product.image" alt="Imagen del producto" class="product-image" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="price">${{ product.price }}</p>
+          <p class="category"><strong>Categoría:</strong> {{ product.category }}</p>
+          <p class="quantity"><strong>Cantidad:</strong> {{ product.quantity }}</p>
+          
+          <!-- Botón Ver más que muestra detalles adicionales -->
+          <button @click="toggleDetails(product.id)" class="view-details-btn">
+            {{ product.showDetails ? 'Ver menos' : 'Ver más' }}
+          </button>
+
+          <!-- Especificaciones del producto -->
+          <div v-if="product.showDetails" class="product-specifications">
+            <p><strong>Descripción:</strong> {{ product.description }}</p>
+            <p><strong>Dimensiones:</strong> {{ product.dimensions }}</p>
+            <p><strong>Material:</strong> {{ product.material }}</p>
+            <p><strong>Color:</strong> {{ product.color }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
